@@ -448,7 +448,7 @@ Logix 提供了基于 **React 19** 的现代化 Web 管理界面，支持实时�
 |:----:|:----:|:----:|:----:|:-------:|
 | React 19 | TypeScript 5.9 | Vite 7 | Tailwind 4 | Radix UI |
 
-详细介绍见 [logix-console/README.md](logix-console/README.md)
+详细介绍见 [logix-console/README.md](https://github.com/chienxx/logix-console/blob/master/README.md)
 
 ---
 
