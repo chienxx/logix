@@ -1,0 +1,4 @@
+# Logix Auto Configuration
+org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
+com.logix.client.core.trace.aspect.TraceAspect,\
+com.logix.client.core.trace.config.TraceIdConfig

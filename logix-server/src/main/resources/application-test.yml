@@ -1,0 +1,19 @@
+# 测试环境配置
+logix:
+  kafka:
+    bootstrap-servers: test-kafka:9092
+    group-id: logix-server-test
+
+  clickhouse:
+    url: jdbc:clickhouse://test-clickhouse:8123
+    db-name: default
+    username: default
+    password: test_password
+
+  redis:
+    mode: SINGLE
+    password: test_redis_pwd
+    database: 0
+    single:
+      host: test-redis
+      port: 6379

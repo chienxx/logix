@@ -1,0 +1,19 @@
+# 生产环境配置
+logix:
+  kafka:
+    bootstrap-servers: prod-kafka:9092
+    group-id: logix-server-prod
+
+  clickhouse:
+    url: jdbc:clickhouse://prod-clickhouse:8123
+    db-name: default
+    username: default
+    password: prod_password
+
+  redis:
+    mode: SINGLE
+    password: prod_redis_pwd
+    database: 0
+    single:
+      host: prod-redis
+      port: 6379

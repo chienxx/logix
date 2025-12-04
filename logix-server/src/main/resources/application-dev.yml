@@ -1,0 +1,19 @@
+# 开发环境配置
+logix:
+  kafka:
+    bootstrap-servers: dev-kafka:9092
+    group-id: logix-server-dev
+
+  clickhouse:
+    url: jdbc:clickhouse://dev-clickhouse:8123
+    db-name: default
+    username: default
+    password: dev_password
+
+  redis:
+    mode: SINGLE
+    password: dev_redis_pwd
+    database: 0
+    single:
+      host: dev-redis
+      port: 6379
