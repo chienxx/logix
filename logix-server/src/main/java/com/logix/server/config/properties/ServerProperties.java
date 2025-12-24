@@ -92,17 +92,17 @@ public class ServerProperties {
     @Getter
     @Setter
     public static class Pipeline {
-        private LogPipeline runLog = new LogPipeline(10000, 2000, 100);
-        private LogPipeline traceLog = new LogPipeline(5000, 1000, 50);
+        private LogPipeline runLog = new LogPipeline(10000, 2000, 5000L);
+        private LogPipeline traceLog = new LogPipeline(5000, 1000, 10000L);
 
         @Getter
         @Setter
         public static class LogPipeline {
             private Integer queueCapacity;
             private Integer batchSize;
-            private Integer batchTimeoutMs;
+            private Long batchTimeoutMs;//超过此时间即使未达到batchSize，也写入。单位毫秒
 
-            public LogPipeline(int queueCapacity, int batchSize, int batchTimeoutMs) {
+            public LogPipeline(Integer queueCapacity, Integer batchSize, Long batchTimeoutMs) {
                 this.queueCapacity = queueCapacity;
                 this.batchSize = batchSize;
                 this.batchTimeoutMs = batchTimeoutMs;

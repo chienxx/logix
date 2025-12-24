@@ -41,23 +41,27 @@ public class LogBatchWriter<T extends BaseLogEvent> implements Runnable {
 
     @Override
     public void run() {
-        log.info("[{}LogWriter] 批量写入线程启动 | batchSize:{} | timeout:{}ms",
-            logType, batchSize, batchTimeoutMs);
+        log.info("[{}LogWriter] 批量写入线程启动 | batchSize:{} | timeout:{}ms", logType, batchSize, batchTimeoutMs);
+
+        List<T> buffer = new ArrayList<>(batchSize);
+        long lastFlushTime = System.currentTimeMillis();
 
         while (running) {
             try {
-                List<T> events = new ArrayList<>(batchSize);
-
                 // 阻塞等待第一条消息
-                T first = queue.poll(batchTimeoutMs, TimeUnit.MILLISECONDS);
+                T first = queue.poll(100, TimeUnit.MILLISECONDS);
                 if (first != null) {
-                    events.add(first);
+                    buffer.add(first);
                     // 尝试批量获取更多消息
-                    queue.drainTo(events, batchSize - 1);
+                    queue.drainTo(buffer, batchSize - 1);
                 }
 
-                if (!events.isEmpty()) {
-                    writer.batchInsert(events);
+                boolean isSizeEnough = buffer.size() >= batchSize;
+                boolean isTimeOut = (System.currentTimeMillis() - lastFlushTime) >= batchTimeoutMs;
+
+                if (!buffer.isEmpty() && (isSizeEnough || isTimeOut)) {
+                    writer.batchInsert(buffer);
+                    lastFlushTime = System.currentTimeMillis(); // 重置计时器
                 }
             } catch (Exception e) {
                 log.error("[{}Writer] 批量写入异常", logType, e);

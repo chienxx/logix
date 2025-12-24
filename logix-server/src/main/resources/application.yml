@@ -37,9 +37,9 @@ logix:
   pipeline:
     run-log:
       queue-capacity: 10000
-      batch-size: 1000
-      batch-timeout-ms: 100
+      batch-size: 5000
+      batch-timeout-ms: 5000
     trace-log:
       queue-capacity: 5000
-      batch-size: 200
-      batch-timeout-ms: 100
+      batch-size: 500
+      batch-timeout-ms: 10000
